@@ -1,12 +1,11 @@
-import Board from './pages/Board.tsx';
-import React from 'react';
+import Header from './components/Header.tsx'
+import Board from './pages/Board.tsx'
 
-const App:React.FC = () => {
-
-  return (
-    <Board>
-    </Board>
-  )
-}
+const App: React.FC = () => (
+  <>
+    <Header />
+    <Board />
+  </>
+)
 
 export default App
