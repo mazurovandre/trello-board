@@ -8,12 +8,13 @@ const TaskCard: React.FC<ITaskCard> = ({ title }) => {
   return (
     <Box
       sx={{
-        borderRadius: '10px',
-        background: '#dddddd',
+        borderRadius: '2px',
+        background: '#ffffff',
         minHeight: 100,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        cursor: 'pointer',
       }}
     >
       <Box>{title}</Box>
