@@ -1,38 +1,54 @@
 import { Box, Stack } from '@mui/material'
+import { Droppable } from 'react-beautiful-dnd'
+import TaskCard from './TaskCard'
 
 interface ITaskColumn {
+  id: number
   title: string
-  children?: React.ReactNode
+  itemIDs: number[]
 }
 
-const TaskColumn: React.FC<ITaskColumn> = ({ title, children }) => {
+const TaskColumn: React.FC<ITaskColumn> = ({ title, id, itemIDs }) => {
   return (
-    <Box
-      sx={{
-        background: '#E0E4EC',
-        padding: '8px',
-        borderRadius: '2px',
-      }}
-    >
-      <Box
-        sx={{
-          marginBottom: '16px',
-          fontWeight: 700,
-        }}
-      >
-        {title}
-      </Box>
+    <Droppable droppableId={id.toString()}>
+      {(provided) => (
+        <div ref={provided.innerRef} {...provided.droppableProps}>
+          <Box
+            sx={{
+              background: '#E0E4EC',
+              padding: '8px',
+              borderRadius: '2px',
+            }}
+          >
+            <Box
+              sx={{
+                marginBottom: '16px',
+                fontWeight: 700,
+              }}
+            >
+              {title}
+            </Box>
 
-      <Stack
-        sx={{
-          // backgroundColor: 'rgba(244, 244, 244, 1)',
-          textAlign: 'center',
-        }}
-        spacing={1}
-      >
-        {children}
-      </Stack>
-    </Box>
+            <Stack
+              sx={{
+                textAlign: 'center',
+              }}
+              spacing={1}
+            >
+              {itemIDs.map((itemID, index) => (
+                <TaskCard
+                  key={Math.random()}
+                  id={itemID}
+                  index={index}
+                  title={itemID.toString()}
+                />
+              ))}
+            </Stack>
+          </Box>
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
   )
 }
 

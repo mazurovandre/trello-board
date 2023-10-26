@@ -1,39 +1,55 @@
 import { Box } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
-import { IBoardData } from '../../../types/types'
-import TaskCard from '../ui/TaskCard'
+import { IColumnData } from '../../../types/types'
 import TaskColumn from '../ui/TaskColumn'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 interface IBoard {
-  data: IBoardData[]
+  columnsData: IColumnData[]
 }
 
-const Board: React.FC<IBoard> = ({ data }) => {
-  const columnItems = data.map((column, index, arr) => {
-    const items = column.items.map((item) => <TaskCard title={item} />)
+const Board: React.FC<IBoard> = ({ columnsData }) => {
+  const columnItems = columnsData.map((column, _, arr) => {
     return (
-      <Grid key={column.title + index} xs={12 / arr.length}>
-        <TaskColumn title={column.title}>{items}</TaskColumn>
+      <Grid key={column.id} xs={12 / arr.length}>
+        <TaskColumn
+          id={column.id}
+          title={column.title}
+          itemIDs={column.itemIDs}
+        />
       </Grid>
     )
   })
+
+  const onDragStart = () => {}
+
+  const onDragUpdate = () => {}
+
+  const onDragEnd = () => {}
+
   return (
-    <Box
-      maxWidth="xl"
-      sx={{
-        padding: '0 24px',
-      }}
+    <DragDropContext
+      onDragStart={onDragStart}
+      onDragUpdate={onDragUpdate}
+      onDragEnd={onDragEnd}
     >
-      <Grid
-        container
-        spacing={3}
+      <Box
+        maxWidth="xl"
         sx={{
-          width: '100%',
+          padding: '0 24px',
         }}
       >
-        {columnItems}
-      </Grid>
-    </Box>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            width: '100%',
+          }}
+        >
+          {columnItems}
+        </Grid>
+      </Box>
+    </DragDropContext>
   )
 }
 

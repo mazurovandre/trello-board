@@ -1,30 +1,34 @@
 import Header from './components/layout/Header.tsx'
 import Board from './components/layout/Board.tsx'
-import { IBoardData } from './../types/types.ts'
+import { IColumnData } from './../types/types.ts'
 
-const boardData: IBoardData[] = [
+const columnsData: IColumnData[] = [
   {
+    id: 1,
     title: 'Запланировано',
-    items: ['Item 1', 'Item 2'],
+    itemIDs: [2, 3],
   },
   {
+    id: 2,
     title: 'В работе',
-    items: ['Item 3'],
+    itemIDs: [1],
   },
   {
+    id: 3,
     title: 'На проверке',
-    items: ['Item 4'],
+    itemIDs: [4],
   },
   {
+    id: 4,
     title: 'Выполнено',
-    items: [],
+    itemIDs: [],
   },
 ]
 
 const App: React.FC = () => (
   <>
     <Header />
-    <Board data={boardData} />
+    <Board columnsData={columnsData} />
   </>
 )
 
