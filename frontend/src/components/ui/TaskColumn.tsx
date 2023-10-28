@@ -1,6 +1,7 @@
 import { Box, Stack } from '@mui/material'
 import { Droppable } from 'react-beautiful-dnd'
 import TaskCard from './TaskCard'
+import { taskData } from '../../mock/data'
 
 interface ITaskColumn {
   id: number
@@ -40,7 +41,7 @@ const TaskColumn: React.FC<ITaskColumn> = ({ title, id, itemIDs }) => {
                   key={Math.random()}
                   id={itemID}
                   index={index}
-                  title={itemID.toString()}
+                  title={taskData[itemID.toString()].title}
                 />
               ))}
             </Stack>

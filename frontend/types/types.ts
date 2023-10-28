@@ -5,7 +5,5 @@ export interface IColumnData {
 }
 
 export interface ITaskData {
-  id: number
-  columnID: number
   title: string
 }
